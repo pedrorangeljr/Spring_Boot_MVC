@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -22,7 +23,7 @@
 					<th>Email:</th>
 					<td><input type="email" id="email" name="email" size="45" /></td>
 				</tr>
-					<tr>
+				<tr>
 					<th>Idade:</th>
 					<td><input type="number" id="idade" name="idade" size="45" /></td>
 				</tr>
@@ -34,6 +35,26 @@
 			</table>
 
 		</form>
+	</div>
+	<br />
+	<div align="center">
+
+		<br />
+		<table border="1" cellpadding="5">
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Idade</th>
+			</tr>
+			<tr th:each="pessoa : ${pessoas}">
+				<td th:text="${pessoa.id}"></td>
+				<td th:text="${pessoa.nome}"></td>
+				<td th:text="${pessoa.email}"></td>
+				<td th:text="${pessoa.idade}"></td>
+			</tr>
+		</table>
+
 	</div>
 </body>
 </html>
