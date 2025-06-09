@@ -6,26 +6,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center" style="margin-top: 100px;">
+	<div align="center" style="margin-top: 20px;">
 
-		<form action="salvarpessoa" method="post">
+		<form action="salvarpessoa" method="post" th:object="${pessoaobj}">
 
 			<table border="1" cellpadding="5">
 				<caption>
 					<h2>Cadastrar Pessoa</h2>
 				</caption>
+				<tr>
+					<th>ID:</th>
+					<td><input readonly="readonly" id="id" name="id" size="45" th:field="*{id}"/></td>
+				</tr>
 
 				<tr>
 					<th>Nome:</th>
-					<td><input type="text" id="nome" name="nome" size="45" /></td>
+					<td><input type="text" id="nome" name="nome" size="45" th:field="*{nome}"/></td>
 				</tr>
 				<tr>
 					<th>Email:</th>
-					<td><input type="email" id="email" name="email" size="45" /></td>
+					<td><input type="email" id="email" name="email" size="45" th:field="*{email}"/></td>
 				</tr>
 				<tr>
 					<th>Idade:</th>
-					<td><input type="number" id="idade" name="idade" size="45" /></td>
+					<td><input type="number" id="idade" name="idade" size="45" th:field="*{idade}"/></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
@@ -47,15 +51,19 @@
 				<th>Nome</th>
 				<th>Email</th>
 				<th>Idade</th>
+				<th>Ações</th>
 			</tr>
 			<tr th:each="pessoa : ${pessoas}">
 				<td th:text="${pessoa.id}"></td>
 				<td th:text="${pessoa.nome}"></td>
 				<td th:text="${pessoa.email}"></td>
 				<td th:text="${pessoa.idade}"></td>
+				<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a>
+						&nbsp;&nbsp;&nbsp;&nbsp; <a>Excluir</a></td>
 			</tr>
 		</table>
 
 	</div>
+	
 </body>
 </html>

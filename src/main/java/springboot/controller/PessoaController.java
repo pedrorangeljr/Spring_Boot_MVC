@@ -1,8 +1,11 @@
 package springboot.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,5 +43,14 @@ public class PessoaController {
 		Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
 		andView.addObject("pessoas", pessoaIt);
 		return andView;
+	}
+	
+	@GetMapping(value="/editarpessoa/{idpessoa}")
+	public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
+		modelAndView.addObject("pessoaobj", pessoa.get());
+		return modelAndView;
 	}
 }
