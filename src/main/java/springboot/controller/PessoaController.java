@@ -11,26 +11,31 @@ import springboot.repository.PessoaRepository;
 
 @Controller
 public class PessoaController {
-	
+
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	@GetMapping(value="/cadastropessoa")
+	@GetMapping(value = "/cadastropessoa")
 	public String inicio() {
-		
+
 		return "cadastro/cadastropessoa";
 	}
-	
-	@PostMapping(value="/salvarpessoa")
-	public String salvar(Pessoa pessoa) {
-		
+
+	@PostMapping(value = "/salvarpessoa")
+	public ModelAndView salvar(Pessoa pessoa) {
+
 		pessoaRepository.save(pessoa);
-		return "cadastro/cadastropessoa";
+
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
+		andView.addObject("pessoas", pessoaIt);
+
+		return andView;
 	}
-	
-	@GetMapping(value="/listapessoas")
+
+	@GetMapping(value = "/listapessoas")
 	public ModelAndView pessoas() {
-		
+
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
 		andView.addObject("pessoas", pessoaIt);
